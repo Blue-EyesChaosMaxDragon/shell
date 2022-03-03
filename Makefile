@@ -32,6 +32,10 @@ clean:
 
 # Configure local settings on system
 configure:
+	if [ "$(strip $(DESTDIR))" = "" ]; then \
+		# Make sure user extensions are enabled \
+		dconf write /org/gnome/shell/disable-user-extensions false; \
+	fi
 	sh scripts/configure.sh
 
 compile: $(sources) clean
